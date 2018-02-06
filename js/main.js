@@ -1,4 +1,4 @@
-var notes = [
+let notes = [
     'C',
     'D',
     'E',
@@ -8,22 +8,39 @@ var notes = [
     'B'
 ];
 
-var noteContainer = document.getElementById("noteContainer");
-var stringContainer = document.getElementById("stringContainer");
+let timeout = 10000;
+
+let noteContainer = document.getElementById("noteContainer");
+let stringContainer = document.getElementById("stringContainer");
 
 function setNote(note) {
-    var noteElement = "<p>C</p>";
+    let noteElement = `<p>${notes[note]}</p>`;
     noteContainer.innerHTML = noteElement;
 }
 
 function setString(string) {
-    var stringElement = "<p>1</p>";
+    let stringElement = `<p>${string}</p>`;
     stringContainer.innerHTML = stringElement;
 }
 
 function start() {
-    setNote(0);
-    setString(1);
+    next();
+}
+
+function next() {
+    let note, string = [nextNote(), nextString];
+    setNote(nextNote());
+    setString(nextString());
+
+    setTimeout(next, timeout);
+}
+
+function nextNote() {
+    return Math.ceil(Math.random() * 6);
+}
+
+function nextString() {
+    return Math.ceil(Math.random() * 5) + 1;
 }
 
 start();
