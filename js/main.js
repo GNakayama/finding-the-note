@@ -9,6 +9,8 @@ let notes = [
 ];
 
 let timeout = 10000;
+let speed = 1;
+let loopId = 0;
 
 let noteContainer = document.getElementById("noteContainer");
 let stringContainer = document.getElementById("stringContainer");
@@ -23,16 +25,23 @@ function setString(string) {
     stringContainer.innerHTML = stringElement;
 }
 
-function start() {
-    next();
+function loop() {
+    generateNext();
+    loopId = setTimeout(loop, timeout/speed);
 }
 
-function next() {
+function startLoop() {
+    loop();
+}
+
+function stopLoop() {
+    clearTimeout(loopId);
+}
+
+function generateNext() {
     let note, string = [nextNote(), nextString];
     setNote(nextNote());
     setString(nextString());
-
-    setTimeout(next, timeout);
 }
 
 function nextNote() {
@@ -42,5 +51,3 @@ function nextNote() {
 function nextString() {
     return Math.ceil(Math.random() * 5) + 1;
 }
-
-start();
