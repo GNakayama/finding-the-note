@@ -2,6 +2,7 @@ let toggleLoopButton = document.getElementById("toggleLoop-button");
 let nextButton = document.getElementById("next-button");
 let speedUpButton = document.getElementById("speedUp-button");
 let speedDownButton = document.getElementById("speedDown-button");
+let speedContainer = document.getElementById("speedContainer");
 
 function blockButton(button) {
     button.disabled = true;
@@ -17,13 +18,13 @@ function toggleButtonBlock(button) {
 
 function start() {
     toggleLoopButton.innerHTML = 'Stop';
+    setSpeed(speed);
     startLoop();
 }
 
 function stop() {
     toggleLoopButton.innerHTML = 'Start';
     stopLoop();
-
 }
 
 function toggleLoop() {
@@ -35,8 +36,13 @@ function next() {
     generateNext();
 }
 
+function setSpeed(speed) {
+    speedContainer.innerHTML = `<p>speed: ${speed}x</p>`;
+}
+
 function speedUp() {
     speed += 1;
+    setSpeed(speed);
 
     if (speed > 1) {
         unblockButton(speedDownButton);
@@ -45,6 +51,7 @@ function speedUp() {
 
 function speedDown() {
     speed -= 1;
+    setSpeed(speed);
 
     if (speed <= 1) {
         blockButton(speedDownButton);

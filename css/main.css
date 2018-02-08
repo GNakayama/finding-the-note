@@ -2,7 +2,7 @@ body {
     background-color: black;
 }
 
-.header, .display, .controls{
+.header, .display, .controls, #speedContainer{
     text-align: center;
 }
 
@@ -12,7 +12,7 @@ body {
 }
 
 .display {
-    height: 216px;
+    height: 290px;
 }
 
 .display p {
@@ -23,6 +23,12 @@ body {
     margin: auto;
     width: 285px;
     padding: 5px;
+}
+
+#speedContainer p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 27px;
+    color: white;
 }
 
 #noteContainer p{
