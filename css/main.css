@@ -1,15 +1,38 @@
+body {
+    background-color: black;
+}
+
+.header, .display, .controls{
+    text-align: center;
+}
+
 .header h1{
-    color: grey;
+    color: #607d8b;
+    font-family: 'Robot Slab', serif;
+}
+
+.display {
+    height: 216px;
+}
+
+.display p {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.mainContainer {
+    margin: auto;
+    width: 285px;
+    padding: 5px;
 }
 
 #noteContainer p{
-    color: green;
-    font-size: 24px;
+    color: #4caf50;
+    font-size: 72px;
 }
 
 #stringContainer p{
-    color: red;
-    font-size: 24px;
+    color: #f44336;
+    font-size: 54px;
 }
 
 #noteContainer, #stringContainer{

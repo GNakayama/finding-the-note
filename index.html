@@ -2,21 +2,27 @@
     <head>
         <title>Finding the note</title>
 
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
     </head>
     <body>
-        <div class="header">
-            <h1>Finding the note</h1>
-        </div>
-        <div class="display">
-            <div id="noteContainer"></div>
-            <div id="stringContainer"></div>
-        </div>
-        <div class="controls">
-            <button type="button" id="toggleLoop-button">Start</button>
-            <button type="button" id="next-button">Next</button>
-            <button type="button" id="speedUp-button">Speed Up</button>
-            <button disabled type="button" id="speedDown-button">Speed Down</button>
+        <div class="mainContainer">
+            <div class="header">
+                <h1>Finding the note</h1>
+            </div>
+            <div class="display">
+                <div id="noteContainer"></div>
+                <div id="stringContainer"></div>
+            </div>
+            <div class="controls">
+                <button type="button" id="toggleLoop-button">Start</button>
+                <button type="button" id="next-button">Next</button>
+                <button type="button" id="speedUp-button">Speed Up</button>
+                <button disabled type="button" id="speedDown-button">Speed Down</button>
+            </div>
         </div>
         <script src="js/main.js"></script>
         <script src="js/controller.js"></script>
