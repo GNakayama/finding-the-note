@@ -5,15 +5,11 @@ export enum Accidental {
 }
 
 export enum Octave {
-  Zero = 0,
-  One = 1,
-  Two = 2,
-  Three = 3,
-  Four = 4,
-  Five = 5,
-  Six = 6,
-  Seven = 7,
-  Eight = 8,
+  Two = '2',
+  Three = '3',
+  Four = '4',
+  Five = '5',
+  Six = '6',
 }
 
 export enum Pitch {
@@ -30,4 +26,10 @@ export enum GameStatus {
   Loading = 'loading',
   Playing = 'playing',
   Waiting = 'waiting',
+}
+
+export interface Note {
+  pitch: Pitch;
+  accidental: Accidental;
+  octave: Octave;
 }

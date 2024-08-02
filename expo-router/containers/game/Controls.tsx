@@ -2,37 +2,38 @@ import { View, XStack } from 'tamagui';
 import { Button } from 'components';
 import { GameStatus } from './types';
 
+const MAX_BPM = 120;
+const MIN_BPM = 20;
+
 interface ControlProps {
   status: GameStatus;
-  onStart: () => void;
+  bpm: number;
   onFinish: () => void;
   onSpeedUp: () => void;
   onSpeedDown: () => void;
 }
 
 export function Controls(props: ControlProps) {
-  const { status } = props;
-
+  const { bpm } = props;
   return (
     <XStack>
       <View paddingHorizontal={5}>
-        <Button onPress={props.onSpeedUp} height={60}>
-          Speed Up
-        </Button>
-      </View>
-      <View paddingHorizontal={5}>
         <Button
-          onPress={
-            status == GameStatus.Playing ? props.onFinish : props.onStart
-          }
+          onPress={props.onSpeedDown}
           height={60}
+          disabled={bpm <= MIN_BPM}
         >
-          {status == GameStatus.Playing ? 'Finish' : 'Start'}
+          Speed Down
         </Button>
       </View>
       <View paddingHorizontal={5}>
-        <Button onPress={props.onSpeedDown} height={60}>
-          Speed Down
+        <Button onPress={props.onFinish} height={60}>
+          Finish
+        </Button>
+      </View>
+      <View paddingHorizontal={5}>
+        <Button onPress={props.onSpeedUp} height={60} disabled={bpm >= MAX_BPM}>
+          Speed Up
         </Button>
       </View>
     </XStack>

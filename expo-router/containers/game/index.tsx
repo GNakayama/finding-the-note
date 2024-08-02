@@ -1,23 +1,45 @@
+import React from 'react';
 import { router } from 'expo-router';
+import { useEffect, useState } from 'react';
 import { View, YStack } from 'tamagui';
-import { Header } from 'components/Header';
+import { Header, Text } from 'components';
 
 import { Controls } from './Controls';
 import { GameNote } from './GameNote';
 import { BPM } from './BPM';
-import { Accidental, GameStatus, Octave, Pitch } from './types';
+import { Accidental, GameStatus, Note, Octave, Pitch } from './types';
 
-function Countdow() {
-  return <View width="50px" height="50px" backgroundColor="$background" />;
-}
-
-function GameMain({ status }: { status: GameStatus }) {
-  const bpm = 80;
-  const note = {
+const GameContext = React.createContext({
+  status: GameStatus.Loading,
+  count: 3,
+  bpm: 30,
+  note: {
     pitch: Pitch.A,
     accidental: Accidental.Sharp,
     octave: Octave.Five,
-  };
+  },
+  setBpm: (bpm: number) => {},
+});
+
+interface CountdowProps {
+  count: number;
+}
+
+function Countdow(props: CountdowProps) {
+  return (
+    <View width="100%" flexGrow={1}>
+      <View flexGrow={1} flex={1}>
+        <View flexGrow={1} flex={1} alignItems="center" justifyContent="center">
+          <Text fontSize={180}>{props.count}</Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+function GameMain() {
+  const gameContext = React.useContext(GameContext);
+  const { bpm, note, status, setBpm } = gameContext;
 
   return (
     <View width="100%" flexGrow={1}>
@@ -33,29 +55,83 @@ function GameMain({ status }: { status: GameStatus }) {
           <BPM bpm={bpm} />
         </View>
       </View>
-      <Controls
-        status={status}
-        onStart={() => {}}
-        onFinish={() => {
-          router.replace('/score');
-        }}
-        onSpeedUp={() => {}}
-        onSpeedDown={() => {}}
-      />
+      <View alignItems="center">
+        <Controls
+          bpm={bpm}
+          status={status}
+          onFinish={() => {
+            router.replace('/score');
+          }}
+          onSpeedUp={() => {
+            setBpm(bpm + 5);
+          }}
+          onSpeedDown={() => {
+            setBpm(bpm - 5);
+          }}
+        />
+      </View>
     </View>
   );
 }
 
-function renderGame(status: GameStatus) {
-  if (status == GameStatus.Loading) {
-    return <Countdow />;
+function RenderGame(props: { status: GameStatus; count: number }) {
+  if (props.status == GameStatus.Loading) {
+    return <Countdow count={props.count} />;
   }
 
-  return <GameMain status={status} />;
+  return <GameMain />;
+}
+
+function getRandomNote(): Note {
+  const pitches = Object.values(Pitch);
+  const accidentals = Object.values(Accidental);
+  const octaves = Object.values(Octave);
+
+  const pitch = pitches[Math.floor(Math.random() * pitches.length)];
+  const accidental =
+    accidentals[Math.floor(Math.random() * accidentals.length)];
+  const octave = octaves[Math.floor(Math.random() * octaves.length)];
+
+  if (octave === Octave.Two && [Pitch.C, Pitch.D].includes(pitch)) {
+    return getRandomNote();
+  }
+
+  return { pitch, accidental, octave };
 }
 
 export default function Game() {
-  const status = GameStatus.Waiting;
+  const [status, setStatus] = useState(GameStatus.Loading);
+  const [count, setCount] = useState(3);
+  const [bpm, setBpm] = useState(30);
+  const [note, setNote] = useState(getRandomNote());
+  const frequency = (60 / bpm) * 1000;
+
+  useEffect(() => {
+    if (count === 0) {
+      if (status === GameStatus.Loading) {
+        setStatus(GameStatus.Playing);
+      }
+
+      const timeoutId = setTimeout(() => {
+        const note = getRandomNote();
+        setNote(note);
+      }, frequency);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+
+    const timeoutId = setTimeout(() => {
+      if (count > 0) {
+        setCount(count - 1);
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [count, frequency, status, note]);
 
   return (
     <View
@@ -68,7 +144,9 @@ export default function Game() {
     >
       <YStack flexGrow={1} width="100%">
         <Header />
-        {renderGame(status)}
+        <GameContext.Provider value={{ status, count, bpm, note, setBpm }}>
+          <RenderGame status={status} count={count} />
+        </GameContext.Provider>
       </YStack>
     </View>
   );
