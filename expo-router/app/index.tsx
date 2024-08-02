@@ -1,6 +1,6 @@
-import { View, YStack } from 'tamagui'
-import { Link } from 'expo-router'
-import { Button, Header, Text } from "components";
+import { View, YStack } from 'tamagui';
+import { Link } from 'expo-router';
+import { Button, Header, Text } from 'components';
 
 export default function Index() {
   return (
@@ -24,6 +24,5 @@ export default function Index() {
         </View>
       </YStack>
     </View>
-  )
+  );
 }
-

@@ -1,13 +1,10 @@
-import { Button as TamaguiButton } from 'tamagui';
-import { View } from "tamagui";
+import { Button as TamaguiButton, ButtonProps } from 'tamagui';
+import { View } from 'tamagui';
 
-export function Button(props: any) {
+export function Button(props: ButtonProps) {
   const { marginHorizontal, marginVertical } = props;
   return (
-    <View
-      flexGrow={1}
-      {...props}
-    >
+    <View flexGrow={1} {...props}>
       <View
         width="100%"
         backgroundColor="$shadowColor"
