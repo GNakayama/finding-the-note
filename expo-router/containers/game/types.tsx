@@ -1,7 +1,7 @@
 export enum Accidental {
   Natural = '',
   Sharp = '#',
-  Flat = 'b'
+  Flat = 'b',
 }
 
 export enum Octave {
@@ -13,7 +13,7 @@ export enum Octave {
   Five = 5,
   Six = 6,
   Seven = 7,
-  Eight = 8
+  Eight = 8,
 }
 
 export enum Pitch {
@@ -23,11 +23,11 @@ export enum Pitch {
   D = 'D',
   E = 'E',
   F = 'F',
-  G = 'G'
+  G = 'G',
 }
 
 export enum GameStatus {
   Loading = 'loading',
   Playing = 'playing',
-  Waiting = 'waiting'
+  Waiting = 'waiting',
 }

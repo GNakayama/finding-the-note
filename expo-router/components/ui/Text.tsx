@@ -1,8 +1,8 @@
-import { Text as TamaguiText } from 'tamagui'
+import { Text as TamaguiText, TextProps } from 'tamagui';
 
-export function Text(props: any) {
-  return <
-    TamaguiText
+export function Text(props: TextProps) {
+  return (
+    <TamaguiText
       fontFamily="monospace"
       fontWeight="bold"
       color="$text"
@@ -10,4 +10,5 @@ export function Text(props: any) {
       shadowOffset={{ width: 5, height: 5 }}
       {...props}
     />
+  );
 }
