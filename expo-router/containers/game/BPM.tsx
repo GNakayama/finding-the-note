@@ -7,8 +7,14 @@ interface BPMProps {
 
 export function BPM(props: BPMProps) {
   return (
-    <View height="50px" backgroundColor="$background" justifyContent="center">
-      <Text>{`Speed: ${props.bpm} BPM`}</Text>
+    <View
+      paddingVertical={25}
+    >
+      <Text
+        fontSize={30}
+      >
+        {`Speed: ${props.bpm} BPM`}
+      </Text>
     </View>
   )
 }

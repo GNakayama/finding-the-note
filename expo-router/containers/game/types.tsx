@@ -26,13 +26,8 @@ export enum Pitch {
   G = 'G'
 }
 
-export enum TimerUnit {
-  Seconds = 's',
-  Milliseconds = 'ms'
-}
-
 export enum GameStatus {
   Loading = 'loading',
   Playing = 'playing',
-  Finished = 'finished'
+  Waiting = 'waiting'
 }
