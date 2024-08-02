@@ -2,14 +2,13 @@ import { Button as TamaguiButton, ButtonProps } from 'tamagui';
 import { View } from 'tamagui';
 
 export function Button(props: ButtonProps) {
-  const { marginHorizontal, marginVertical } = props;
   return (
     <View flexGrow={1} {...props}>
       <View
         width="100%"
         backgroundColor="$shadowColor"
-        marginHorizontal={marginHorizontal}
-        marginVertical={marginVertical}
+        marginHorizontal={props.marginHorizontal}
+        marginVertical={props.marginVertical}
         height={props.height || 40}
         position="absolute"
         top={5}
