@@ -12,10 +12,22 @@ export function GameNote(props: NoteProps) {
   const { pitch, accidental, octave } = props
 
   return (
-    <XStack width="50px" height="50px" backgroundColor="$background">
-      <Text>{pitch}</Text>
-      <Text>{accidental}</Text>
-      <Text>{octave}</Text>
+    <XStack>
+      <Text
+        fontSize={180}
+      >
+        {pitch}
+      </Text>
+      <Text
+        fontSize={150}
+      >
+        {accidental}
+      </Text>
+      <Text
+        fontSize={180}
+      >
+        {octave}
+      </Text>
     </XStack>
   );
 }
