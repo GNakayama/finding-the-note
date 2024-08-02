@@ -39,7 +39,6 @@ function stopLoop() {
 }
 
 function generateNext() {
-    let note, string = [nextNote(), nextString];
     setNote(nextNote());
     setString(nextString());
 }
